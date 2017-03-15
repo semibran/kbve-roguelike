@@ -1,0 +1,22 @@
+{
+  "name": "kbve-roguelike",
+  "version": "0.0.0",
+  "description": "KBVE roguelike",
+  "license": "MIT",
+  "author": "Brandon Semilla <semibran@gmail.com>",
+  "main": "lib",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/semibran/kbve-roguelike.git"
+  },
+  "scripts": {
+    "watch": "watchify src -o client/build.js -v"
+  },
+  "dependencies": {
+    "express": "^4.15.2",
+    "socket.io": "^1.7.3"
+  },
+  "devDependencies": {
+    "watchify": "^3.9.0"
+  }
+}
