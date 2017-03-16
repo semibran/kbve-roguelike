@@ -1,4 +1,15 @@
 body {
   margin: 0;
   font-family: monospace;
+  background: black;
+  color: white;
+}
+
+main div {
+  display: flex;
+  align-items: center;
+}
+
+main div span {
+  padding: 0 8px;
 }

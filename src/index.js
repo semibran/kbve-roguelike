@@ -1,26 +1,59 @@
-var model = require('./model')()
-var view = require('./view')()
 var socket = require('socket.io-client/dist/socket.io.min.js')()
+var app = require('choo')()
 
-document.body.appendChild(view.element)
-view(model)
+var state =
+  { games :
+    []
+  , users :
+    []
+  }
 
-socket.on('connect', function () {
-  model.push(socket.id)
-  view(model)
-})
+var reducers =
+  {
+  , 'user-add' :
+    (state, users) => (
+      { users :
+        state.users.concat(users)
+      }
+    )
+  , 'user-remove' :
+    (state, users) => (
+      { users :
+        state.users.filter(user => !users.includes(user))
+      }
+    )
+  }
 
-socket.on('user-list', function (ids) {
-  model.push(...ids)
-  view(model)
-})
+var subscriptions =
+  [ function (send, done) {
+      function err(err) {
+        if (err)
+          return done(err)
+      }
+      socket.on
+        ( 'connect'
+        , () =>
+          send('user-add', [socket.id], err)
+        )
+      socket.on
+        ( 'user-list'
+        , users =>
+          send('user-add', users, err)
+        )
+      socket.on
+        ( 'user-connect'
+        , user =>
+          send('user-add', [user], err)
+        )
+      socket.on
+        ( 'user-disconnect'
+        , user =>
+          send('user-remove', [user], err)
+        )
+    }
+  ]
 
-socket.on('user-connect', function (id) {
-  model.push(id)
-  view(model)
-})
+app.model({ state, reducers, subscriptions })
+app.router(['/', require('./views/index')])
 
-socket.on('user-disconnect', function (id) {
-  model.splice(model.indexOf(id), 1)
-  view(model)
-})
+document.body.appendChild(app.start())
