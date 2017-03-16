@@ -9,8 +9,7 @@ var state =
   }
 
 var reducers =
-  {
-  , 'user-add' :
+  { 'user-add' :
     (state, users) => (
       { users :
         state.users.concat(users)
