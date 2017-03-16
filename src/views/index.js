@@ -12,27 +12,31 @@ function view(state, prev, send) {
 
   return html`
     <main>
-      <div class='games'>
-        <i class='material-icons'>videogame_asset</i>
-        <span>
-          ${state.games.length} game${s(state.games.length)} active
-        </span>
+      <div class='modal'>
+        <header class='header'>
+          ${viewItem('title', 'Lobby', 'public')}
+          <section class='stats'>
+            ${viewItem('users', state.users.length, 'people')}
+            ${viewItem('games', state.games.length, 'videogame_asset')}
+          </section>
+        </header>
+        <article class='content'>
+          <span>
+            No games are currently in progress. <a>Create one?</a>
+          </span>
+        </article>
       </div>
-      <div class='users'>
-        <i class='material-icons'>people</i>
-        <span>
-          ${state.users.length} user${s(state.users.length)} online
-        </span>
-      </div>
-      <ul>
-        ${state.users.map(viewUser)}
-      </ul>
     </main>
   `
 
-  function viewUser(user) {
+  function viewItem(name, text, icon) {
     return html`
-      <li>${user}</li>
+      <section class='item ${name}'>
+        <i class='material-icons icon'>${icon}</i>
+        <span class='text'>
+          ${text}
+        </span>
+      </section>
     `
   }
 }

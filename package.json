@@ -10,7 +10,8 @@
     "url": "https://github.com/semibran/kbve-roguelike.git"
   },
   "scripts": {
-    "watch": "watchify src -o client/build.js -t [ babelify --presets [ es2040 ] ] -g uglifyify -v"
+    "watch:js": "watchify src -o client/build.js -t [ babelify --presets [ es2040 ] ] -g uglifyify -v",
+    "watch:css": "node-sass -w src/styles/style.scss client/style.css"
   },
   "dependencies": {
     "choo": "^4.1.0",

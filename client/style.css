@@ -1,15 +1,45 @@
+* {
+  margin: 0; }
+
 body {
-  margin: 0;
   font-family: monospace;
   background: black;
-  color: white;
-}
+  color: white; }
 
-main div {
+a {
+  cursor: pointer;
+  color: red; }
+  a:active {
+    color: maroon; }
+
+html, body, main, .modal {
+  height: 100%; }
+
+.modal {
   display: flex;
-  align-items: center;
-}
-
-main div span {
-  padding: 0 8px;
-}
+  flex-direction: column; }
+  .modal .header, .modal .header .stats, .modal .header .item {
+    display: flex;
+    align-items: center; }
+  .modal .header {
+    padding: 0 8%;
+    background: black;
+    height: 2.5rem;
+    justify-content: space-between;
+    border-bottom: thin solid white; }
+    .modal .header .item, .modal .header .item .text {
+      padding: 0 0.5rem; }
+    .modal .header .item .text {
+      line-height: 1;
+      font-size: 0.8rem;
+      text-transform: uppercase; }
+    .modal .header .item.title {
+      font-weight: bold; }
+  .modal .content {
+    padding: 1rem 8%;
+    text-align: center;
+    color: silver;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
